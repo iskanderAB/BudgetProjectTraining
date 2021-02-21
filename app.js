@@ -7,29 +7,33 @@ UIController =(function(){
         inputType : '.add__type',
         inputDescription : '.add__description',
         inputValue : '.add__value',
-        inputBnn: '.add__btn'
+        inputBtn: '.add__btn'
     };
 
     return {
-        getInput : function () {
+        getInput : () => {
             return {
-                type: document.querySelector(DOMStrings.inputType),
-                description: document.querySelector(DOMStrings.inputDescription),
-                value: document.querySelector(DOMStrings.inputValue)
+                type: document.querySelector(DOMStrings.inputType).value,
+                description: document.querySelector(DOMStrings.inputDescription).value,
+                value: document.querySelector(DOMStrings.inputValue).value
             }
         },
-        DOM: DOMStrings
+        DOM: ()=>DOMStrings
     } ;
 })();
 
 controller =(function(budgetCtrl , UICtrl){
-    console.log("i'm running ")
-    const addItem = () => console.log("add item ! "); 
-    document.querySelector('.add__btn').addEventListener('click',addItem);
+    console.log("i'm running ");
+    let DOM = UICtrl.DOM;
+    const addItem = () => {
+        console.log(UICtrl.getInput());
+        console.log("add item ! ");
+    };
+    document.querySelector(DOM.inputBtn).addEventListener('click',addItem);
 
     document.addEventListener('keypress',(event)=>{
         if (event.keyCode === 13 ){
             addItem(event);
         }
     });
-})(budgetController,UIController)
+})(budgetController,UIController);
