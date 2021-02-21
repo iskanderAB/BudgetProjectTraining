@@ -3,8 +3,24 @@ budgetController =(function(){
 })();
 
 UIController =(function(){
-    return 0 ; 
-})()
+    let DOMStrings = {
+        inputType : '.add__type',
+        inputDescription : '.add__description',
+        inputValue : '.add__value',
+        inputBnn: '.add__btn'
+    };
+
+    return {
+        getInput : function () {
+            return {
+                type: document.querySelector(DOMStrings.inputType),
+                description: document.querySelector(DOMStrings.inputDescription),
+                value: document.querySelector(DOMStrings.inputValue)
+            }
+        },
+        DOM: DOMStrings
+    } ;
+})();
 
 controller =(function(budgetCtrl , UICtrl){
     console.log("i'm running ")
