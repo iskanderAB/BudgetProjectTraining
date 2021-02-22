@@ -1,5 +1,27 @@
 budgetController =(function(){
-    return 0 ; 
+    const Expense = (id, description, value) => {
+        this.id = id;
+        this.description = description;
+        this.value = value;
+    };
+    const Income = () => {
+        this.id = id;
+        this.description = description;
+        this.value = value;
+    };
+    const data = {
+        allItems: {
+            exp: [],
+            inc: []
+        },
+        totals: {
+            exp: 0,
+            inc: 0
+        }
+    };
+    return {
+
+    }
 })();
 
 UIController =(function(){
@@ -18,22 +40,34 @@ UIController =(function(){
                 value: document.querySelector(DOMStrings.inputValue).value
             }
         },
-        DOM: ()=>DOMStrings
+        getDOMNames: ()=>DOMStrings
     } ;
 })();
 
+
 controller =(function(budgetCtrl , UICtrl){
     console.log("i'm running ");
-    let DOM = UICtrl.DOM;
     const addItem = () => {
         console.log(UICtrl.getInput());
         console.log("add item ! ");
     };
-    document.querySelector(DOM.inputBtn).addEventListener('click',addItem);
+    const setupEventListener = () => {
+        const DOM = UICtrl.getDOMNames();
 
-    document.addEventListener('keypress',(event)=>{
-        if (event.keyCode === 13 ){
-            addItem(event);
+        document.querySelector(DOM.inputBtn).addEventListener('click',addItem);
+
+        document.addEventListener('keypress',(event)=>{
+            if (event.keyCode === 13 ){
+                addItem(event);
+            }
+        });
+    };
+    return {
+        init : () => {
+            console.log("Ctrl App running ");
+            setupEventListener();
         }
-    });
+    }
 })(budgetController,UIController);
+
+controller.init();
